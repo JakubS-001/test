@@ -413,10 +413,10 @@ Jeżeli zmienne losowe X1,...,Xn tworzą próbę z populacji o rozkładzie N(μ,
 - przybliżony rozkład N(n*μ, sqrt(n)*σ)
 - dokładny rozkład N(μ, σ/sqrt(n))
 
-Niech L i U będą funkcjami zmiennych losowych stanowiących próbkę spełniającą P(L < σ^2 < U) = 0,9. Następnie różnica (U - L):
--| jest długością 90% przedziału ufności dla wariancji populacji
-- z 90% ufnością obejmuje prawdziwą wartość wariancji populacji
-- jest 90% przedziałem ufności dla wariancji populacji
+Niech $L$ i $U$ będą zmiennymi losowymi takimi, że $P(L < \theta < U) = 1 - \alpha$, przy czym $\theta$ jest nieznanym parametrem rozkładu populacji i $\alpha \in (0, 1)$. Wówczas wielkość $(1 - \alpha)$ nazywamy:
+- obszarem krytycznym
+-| poziomem ufności
+- poziomem krytycznym
 
 Niech X1,...,Xn będzie n-elementową próbą z populacji N(μ, σ) oraz niech x_bar będzie średnią arytmetyczną obserwacji. Który z poniższych zapisów hipotez nie dotyczy testu średniej populacyjnej?
 - H0: μ = 5, H1: μ ≠ 5
