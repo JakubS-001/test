@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Quiz Dashboard</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            background-color: #f5f5f5;
+            padding: 16px;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .container, .row, .col-12 { min-width: 0; }
+        .card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background: white;
+            max-width: 100%;
+        }
+        .card-header {
+            background-color: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 20px;
+        }
+        .card-header h5 {
+            margin: 0;
+            font-size: 1.25rem;
+            color: #333;
+        }
+        .card-body { padding: 24px; }
+        .question-text {
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+        .form-check {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            min-width: 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        .form-check:hover { background: #f0f0f0; }
+        .form-check-input {
+            width: 22px;
+            height: 22px;
+            margin-top: 2px;
+            margin-right: 12px;
+            flex-shrink: 0;
+            border: 2px solid #ddd;
+            cursor: pointer;
+        }
+        .form-check-input:checked {
+            background-color: #0d6efd;
+            border-color: #0d6efd;
+        }
+        .form-check-label {
+            font-size: 1rem;
+            color: #333;
+            display: flex;
+            align-items: flex-start;
+            min-width: 0;
+            width: 100%;
+            overflow-wrap: anywhere;
+            cursor: pointer;
+        }
+        .answer-text {
+            min-width: 0;
+            overflow-wrap: anywhere;
+            width: 100%;
+        }
+        .katex-display {
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding-bottom: 2px;
+        }
+        
+        /* Klasy weryfikacji odpowiedzi */
+        .correct-answer { 
+            background-color: #e8f5e9 !important;
+            border-color: #16a34a !important;
+        }
+        .incorrect-answer { 
+            background-color: #ffebee !important;
+            border-color: #dc2626 !important;
+        }
+        .correct-checkbox::before {
+            content: '✓ ';
+            color: #16a34a;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        .incorrect-checkbox::before {
+            content: '✗ ';
+            color: #dc2626;
+            font-weight: bold;
+            margin-right: 4px;
+        }
+        
+        .navigation-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .navigation-buttons .btn {
+            width: 100%;
+            min-width: 0;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 500;
+            white-space: normal;
+        }
+
+        /* Strefa upuszczania pliku */
+        .drop-zone {
+            border: 2px dashed #0d6efd;
+            padding: 40px 20px;
+            border-radius: 16px;
+            text-align: center;
+            background: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .drop-zone:hover { background: #e9ecef; }
+        
+        .preview-q-card {
+            border-radius: 14px;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Automatyczny Dark Mode bazowany na pliku kolegi */
+        @media (prefers-color-scheme: dark) {
+            :root { color-scheme: dark; }
+            body { background-color: #111827; color: #e5e7eb; }
+            .card { background: #111827; color: #e5e7eb; box-shadow: 0 4px 6px rgba(0, 0, 0, .28); }
+            .card-header { background-color: #0b1120; border-color: #263244; }
+            .card-header h5, .question-text, .form-check-label { color: #f3f4f6; }
+            .form-check { background: #1f2937; border-color: #374151; }
+            .form-check:hover { background: #273449; border-color: #4b5563; }
+            .form-check-input { background-color: #0f172a; border-color: #64748b; }
+            .form-check-input:checked { background-color: #60a5fa; border-color: #60a5fa; }
+            
+            .correct-answer { background-color: #1b382b !important; border-color: #86efac !important; }
+            .incorrect-answer { background-color: #442326 !important; border-color: #fca5a5 !important; }
+            .correct-checkbox::before { color: #86efac; }
+            .incorrect-checkbox::before { color: #fca5a5; }
+            
+            .bg-light { background-color: #1f2937 !important; color: #e5e7eb !important; }
+            .border { border-color: #374151 !important; }
+            .drop-zone { background: #1f2937; border-color: #60a5fa; }
+            .drop-zone:hover { background: #2d3748; }
+            .preview-q-card { border-color: #2d3748; }
+            .list-group-item { background-color: transparent !important; }
+        }
+
+        @media (max-width: 576px) {
+            body { padding: 8px; }
+            .card-header, .card-body { padding: 16px; }
+            .form-check { padding: 14px; }
+            .navigation-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .quiz-check-btn { grid-column: 1 / -1; grid-row: 2; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9">
+
+            <div id="loadingSection" class="card my-4">
+                <div class="card-header text-center">
+                    <h5>Wczytywanie bazy pytań QAML</h5>
+                </div>
+                <div class="card-body">
+                    <div id="loadingStatus" class="text-center py-4">
+                        <div class="spinner-border text-primary mb-3" role="status"></div>
+                        <p>Próba automatycznego wczytania pliku <code>pytania.txt</code>...</p>
+                    </div>
+                    
+                    <div id="fileFallbackUI" style="display: none;">
+                        <div class="alert alert-info small">
+                            <strong>Status:</strong> Zabezpieczenia przeglądarki zablokowały automatyczny odczyt z dysku (częste przy otwieraniu pliku bezpośrednio przez kliknięcie). Przeciągnij plik tekstowy poniżej, aby uruchomić bazę lokalnie.
+                        </div>
+                        <div id="dropZone" class="drop-zone my-3" onclick="document.getElementById('fileInput').click()">
+                            <p class="m-0 py-3 fw-bold text-primary">Przeciągnij i upuść plik <code>pytania.txt</code> tutaj<br><span class="text-muted fw-normal small">lub kliknij, aby wybrać z dysku</span></p>
+                            <input type="file" id="fileInput" class="d-none" accept=".txt">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="menuSection" class="card my-4" style="display: none;">
+                <div class="card-header text-center">
+                    <h5>Panel Konfiguracyjny Quizu</h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success text-center py-3">
+                        Załadowano pomyślnie! Łączna liczba pytań w bazie: <strong id="totalQuestionsCount">0</strong>
+                    </div>
+
+                    <h5 class="mt-4 mb-3 text-secondary">Ustawienia rozgrywki</h5>
+                    
+                    <div class="mb-4">
+                        <label for="quizCountInput" class="form-label fw-bold">Liczba pytań w quizie:</label>
+                        <input type="number" id="quizCountInput" class="form-control form-control-lg" min="1" value="20">
+                        <div class="form-text">Wpisz liczbę pytań lub pozostaw domyślną. Maksymalnie: <span id="maxQuestionsHint">0</span>.</div>
+                    </div>
+
+                    <div class="form-check p-3 mb-2 bg-light rounded-3 border">
+                        <label class="form-check-label d-flex align-items-center">
+                            <input type="checkbox" id="shuffleQuestionsCheck" class="form-check-input my-0" checked>
+                            <span class="ms-1 fw-medium">Losowa kolejność pytań (miksowanie bazy)</span>
+                        </label>
+                    </div>
+
+                    <div class="form-check p-3 mb-4 bg-light rounded-3 border">
+                        <label class="form-check-label d-flex align-items-center">
+                            <input type="checkbox" id="shuffleAnswersCheck" class="form-check-input my-0" checked>
+                            <span class="ms-1 fw-medium">Losowa kolejność wariantów odpowiedzi</span>
+                        </label>
+                    </div>
+
+                    <div class="d-grid gap-3">
+                        <button class="btn btn-success btn-lg py-3 fw-bold shadow-sm" onclick="startQuiz()">Rozpocznij Quiz 🚀</button>
+                        <button class="btn btn-primary py-2" onclick="openPreview()">🔍 Podgląd całej bazy pytań</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="quizSection" class="my-4" style="display: none;">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center py-3">
+                        <h5 class="m-0 fw-bold text-muted">Pytanie <span id="quizCurrentNum">1</span> z <span id="quizTotalNum">20</span></h5>
+                        <button class="btn btn-sm btn-outline-secondary py-1 px-3" onclick="goToMenu()">Menu</button>
+                    </div>
+                    <div class="card-body">
+                        <div id="quizQuestionText" class="question-text fw-bold"></div>
+                        <div id="quizAnswersContainer"></div>
+                    </div>
+                    <div class="card-footer bg-transparent border-top-0 p-3">
+                        <div class="navigation-buttons">
+                            <button id="quizPrevBtn" class="btn btn-secondary" onclick="quizPrev()">Poprzednie</button>
+                            <button id="quizCheckBtn" class="btn btn-success quiz-check-btn" onclick="checkCurrentAnswer()">Sprawdź</button>
+                            <button id="quizNextBtn" class="btn btn-primary" onclick="quizNext()">Następne</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="previewSection" class="my-4" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="m-0 fw-bold">Baza Pytań (<span id="previewCountText">0</span>)</h4>
+                    <button class="btn btn-secondary px-4" onclick="goToMenu()">Powrót do menu</button>
+                </div>
+                <div class="mb-4">
+                    <input type="text" id="previewSearch" class="form-control form-control-lg shadow-sm" placeholder="🔍 Filtruj i szukaj pytań lub odpowiedzi...">
+                </div>
+                <div id="previewListContainer"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    let allQuestions = []; 
+    let quizQuestions = []; 
+    let currentQuizIndex = 0;
+    let quizAnswersState = {}; 
+
+    // Uniwersalny parser formatu QAML zgodny z Twoimi regułami
+    function parseQAML(text) {
+        const lines = text.split(/\r?\n/);
+        const list = [];
+        let currentQ = null;
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            const trimmed = line.trim();
+
+            if (!trimmed || trimmed.startsWith('//')) {
+                continue; // Ignoruj puste linie i komentarze
+            }
+
+            if (trimmed.startsWith('-|')) {
+                if (currentQ) {
+                    currentQ.answers.push({
+                        text: trimmed.substring(2).trim(),
+                        isCorrect: true
+                    });
+                }
+            } else if (trimmed.startsWith('-')) {
+                if (currentQ) {
+                    currentQ.answers.push({
+                        text: trimmed.substring(1).trim(),
+                        isCorrect: false
+                    });
+                }
+            } else {
+                // Nowa linia pytania
+                if (currentQ && currentQ.answers.length > 0) {
+                    list.push(currentQ);
+                }
+                currentQ = {
+                    text: trimmed,
+                    answers: []
+                };
+            }
+        }
+        if (currentQ && currentQ.answers.length > 0) {
+            list.push(currentQ);
+        }
+        return list;
+    }
+
+    // Algorytm mieszania tablicy (Fisher-Yates)
+    function shuffle(array) {
+        let m = array.length, t, i;
+        while (m) {
+            i = Math.floor(Math.random() * m--);
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+        return array;
+    }
+
+    // Wywołanie renderowania LaTeX za pomocą KaTeX
+    function renderMath(element) {
+        if (typeof renderMathInElement === 'function') {
+            renderMathInElement(element, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    }
+
+    // Przetwarzanie tekstu bazy danych
+    function handleDatabaseText(text) {
+        allQuestions = parseQAML(text);
+        if (allQuestions.length === 0) {
+            alert("Błąd: Nie udało się sparsować żadnych pytań. Upewnij się, że format pliku jest poprawny.");
+            return;
+        }
+
+        document.getElementById('loadingSection').style.display = 'none';
+        document.getElementById('menuSection').style.display = 'block';
+
+        document.getElementById('totalQuestionsCount').innerText = allQuestions.length;
+        document.getElementById('maxQuestionsHint').innerText = allQuestions.length;
+        document.getElementById('quizCountInput').value = Math.min(20, allQuestions.length);
+        document.getElementById('quizCountInput').max = allQuestions.length;
+    }
+
+    // Inicjalizacja ładowania przy starcie strony
+    window.addEventListener('load', () => {
+        fetch('pytania.txt')
+            .then(res => {
+                if (!res.ok) throw new Error("Plik lokalny niedostępny bez serwera");
+                return res.text();
+            })
+            .then(text => handleDatabaseText(text))
+            .catch(() => {
+                // Wyświetl panel Drag & Drop w razie błędu CORS / braku pliku
+                document.getElementById('loadingStatus').style.display = 'none';
+                document.getElementById('fileFallbackUI').style.display = 'block';
+            });
+
+        // Obsługa tradycyjnego wyboru pliku
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (evt) => handleDatabaseText(evt.target.result);
+                reader.readAsText(file);
+            }
+        });
+
+        // Obsługa Drag & Drop
+        const dropZone = document.getElementById('dropZone');
+        dropZone.addEventListener('dragover', (e) => e.preventDefault());
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (evt) => handleDatabaseText(evt.target.result);
+                reader.readAsText(file);
+            }
+        });
+
+        // Event listener wyszukiwarki bazy danych
+        document.getElementById('previewSearch').addEventListener('input', (e) => {
+            renderPreview(e.target.value);
+        });
+    });
+
+    // Uruchomienie trybu Quizu
+    function startQuiz() {
+        let requestedCount = parseInt(document.getElementById('quizCountInput').value);
+        if (isNaN(requestedCount) || requestedCount <= 0) requestedCount = allQuestions.length;
+        requestedCount = Math.min(requestedCount, allQuestions.length);
+
+        // Głęboka kopia bazy danych pytań
+        let pool = JSON.parse(JSON.stringify(allQuestions));
+
+        if (document.getElementById('shuffleQuestionsCheck').checked) {
+            pool = shuffle(pool);
+        }
+
+        quizQuestions = pool.slice(0, requestedCount);
+
+        if (document.getElementById('shuffleAnswersCheck').checked) {
+            quizQuestions.forEach(q => shuffle(q.answers));
+        }
+
+        currentQuizIndex = 0;
+        quizAnswersState = {};
+
+        document.getElementById('menuSection').style.display = 'none';
+        document.getElementById('quizSection').style.display = 'block';
+
+        showQuizQuestion();
+    }
+
+    // Wyświetlanie pytania w quizie
+    function showQuizQuestion() {
+        const q = quizQuestions[currentQuizIndex];
+        
+        document.getElementById('quizCurrentNum').innerText = currentQuizIndex + 1;
+        document.getElementById('quizTotalNum').innerText = quizQuestions.length;
+        
+        // Wspiera HTML i obrazki bezpośrednio z pliku txt
+        document.getElementById('quizQuestionText').innerHTML = q.text;
+
+        const container = document.getElementById('quizAnswersContainer');
+        container.innerHTML = '';
+
+        if (!quizAnswersState[currentQuizIndex]) {
+            quizAnswersState[currentQuizIndex] = { checked: [], checkedAnswersVerified: false };
+        }
+        const state = quizAnswersState[currentQuizIndex];
+
+        q.answers.forEach((ans, idx) => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'form-check';
+
+            const label = document.createElement('label');
+            label.className = 'form-check-label';
+
+            const input = document.createElement('input');
+            input.type = 'checkbox';
+            input.className = 'form-check-input';
+            input.value = idx;
+            input.checked = state.checked.includes(idx);
+            
+            if (state.checkedAnswersVerified) {
+                input.disabled = true;
+            }
+
+            const textSpan = document.createElement('span');
+            textSpan.className = 'answer-text';
+            textSpan.innerHTML = ans.text;
+
+            label.appendChild(input);
+            label.appendChild(textSpan);
+            wrapper.appendChild(label);
+            container.appendChild(wrapper);
+
+            // Kolorowanie sprawdzonych odpowiedzi zgodnie ze stylem bazowym
+            if (state.checkedAnswersVerified) {
+                if (ans.isCorrect) {
+                    wrapper.classList.add('correct-answer');
+                    textSpan.classList.add('correct-checkbox');
+                } else if (input.checked) {
+                    wrapper.classList.add('incorrect-answer');
+                    textSpan.classList.add('incorrect-checkbox');
+                }
+            }
+
+            if (!state.checkedAnswersVerified) {
+                input.addEventListener('change', () => {
+                    if (input.checked) {
+                        if (!state.checked).push(idx);
+                        state.checked.push(idx);
+                    } else {
+                        state.checked = state.checked.filter(i => i !== idx);
+                    }
+                });
+            }
+        });
+
+        // Obsługa stanów przycisków
+        document.getElementById('quizPrevBtn').disabled = (currentQuizIndex === 0);
+        
+        const nextBtn = document.getElementById('quizNextBtn');
+        if (currentQuizIndex === quizQuestions.length - 1) {
+            nextBtn.innerText = "Podsumowanie";
+            nextBtn.classList.remove('btn-primary');
+            nextBtn.classList.add('btn-warning');
+        } else {
+            nextBtn.innerText = "Następne";
+            nextBtn.classList.remove('btn-warning');
+            nextBtn.classList.add('btn-primary');
+        }
+
+        renderMath(document.getElementById('quizSection'));
+    }
+
+    // Sprawdzenie poprawności zaznaczenia
+    function checkCurrentAnswer() {
+        const state = quizAnswersState[currentQuizIndex];
+        if (!state || state.checkedAnswersVerified) return;
+
+        state.checkedAnswersVerified = true;
+        showQuizQuestion();
+    }
+
+    // Nawigacja quizu
+    function quizNext() {
+        if (currentQuizIndex < quizQuestions.length - 1) {
+            currentQuizIndex++;
+            showQuizQuestion();
+        } else {
+            showQuizSummary();
+        }
+    }
+
+    function quizPrev() {
+        if (currentQuizIndex > 0) {
+            currentQuizIndex--;
+            showQuizQuestion();
+        }
+    }
+
+    // Podsumowanie wyników
+    function showQuizSummary() {
+        let score = 0;
+        quizQuestions.forEach((q, qIdx) => {
+            const state = quizAnswersState[qIdx] || { checked: [] };
+            let isPerfect = true;
+            q.answers.forEach((ans, ansIdx) => {
+                const wasChecked = state.checked.includes(ansIdx);
+                if (ans.isCorrect !== wasChecked) isPerfect = false;
+            });
+            if (isPerfect) score++;
+        });
+
+        document.getElementById('quizCurrentNum').innerText = "Koniec";
+        document.getElementById('quizQuestionText').innerHTML = "<h3>Podsumowanie Twojego testu</h3>";
+        
+        const container = document.getElementById('quizAnswersContainer');
+        container.innerHTML = `
+            <div class="alert alert-primary text-center py-4 my-3">
+                <h4 class="mb-2">Twój oficjalny wynik:</h4>
+                <span class="display-4 fw-bold">${score} / ${quizQuestions.length}</span><br>
+                <span class="badge bg-dark mt-2 fs-6">Skuteczność: ${Math.round((score / quizQuestions.length) * 100)}%</span>
+            </div>
+            <p class="text-muted text-center small">Pytanie uznawane jest za zaliczone tylko wtedy, gdy zaznaczono wszystkie poprawne warianty i żadnej błędnej odpowiedzi.</p>
+        `;
+
+        document.getElementById('quizPrevBtn').style.display = 'none';
+        document.getElementById('quizCheckBtn').style.display = 'none';
+        
+        const nextBtn = document.getElementById('quizNextBtn');
+        nextBtn.innerText = "Powrót do Menu";
+        nextBtn.onclick = () => {
+            // Przywrócenie pierwotnego stanu przycisków i powrót
+            nextBtn.onclick = quizNext;
+            document.getElementById('quizPrevBtn').style.display = '';
+            document.getElementById('quizCheckBtn').style.display = '';
+            goToMenu();
+        };
+    }
+
+    // Podgląd bazy danych pytań (Wyszukiwarka i Wykaz)
+    function openPreview() {
+        document.getElementById('menuSection').style.display = 'none';
+        document.getElementById('previewSection').style.display = 'block';
+        document.getElementById('previewCountText').innerText = allQuestions.length;
+        document.getElementById('previewSearch').value = '';
+        renderPreview('');
+    }
+
+    function renderPreview(query) {
+        const container = document.getElementById('previewListContainer');
+        container.innerHTML = '';
+
+        const filtered = allQuestions.filter(q => {
+            const textMatch = q.text.toLowerCase().includes(query.toLowerCase());
+            const ansMatch = q.answers.some(a => a.text.toLowerCase().includes(query.toLowerCase()));
+            return textMatch || ansMatch;
+        });
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<div class="text-center p-4 text-muted border rounded-3 bg-light">Nie odnaleziono żadnych pozycji spełniających kryteria wyszukiwania.</div>`;
+            return;
+        }
+
+        filtered.forEach((q, qIdx) => {
+            const card = document.createElement('div');
+            card.className = 'card preview-q-card mb-3';
+
+            const header = document.createElement('div');
+            header.className = 'card-header py-2 d-flex justify-content-between align-items-center bg-light';
+            header.innerHTML = `<span class="fw-bold text-muted small">Pozycja w bazie #${qIdx + 1}</span>`;
+
+            const body = document.createElement('div');
+            body.className = 'card-body p-3';
+
+            const qText = document.createElement('div');
+            qText.className = 'question-text mb-3 fw-bold';
+            qText.innerHTML = q.text;
+            body.appendChild(qText);
+
+            const ul = document.createElement('ul');
+            ul.className = 'list-group list-group-flush';
+
+            q.answers.forEach(ans => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item d-flex align-items-start border-0 ps-0 py-2';
+                
+                const badge = document.createElement('span');
+                if (ans.isCorrect) {
+                    badge.className = 'badge bg-success me-2 mt-1';
+                    badge.innerText = 'POPRAWNA';
+                    li.style.color = '#16a34a';
+                } else {
+                    badge.className = 'badge bg-secondary me-2 mt-1';
+                    badge.innerText = 'BŁĘDNA';
+                }
+
+                const txt = document.createElement('span');
+                txt.innerHTML = ans.text;
+
+                li.appendChild(badge);
+                li.appendChild(txt);
+                ul.appendChild(li);
+            });
+
+            body.appendChild(ul);
+            card.appendChild(header);
+            card.appendChild(body);
+            container.appendChild(card);
+        });
+
+        renderMath(container);
+    }
+
+    function goToMenu() {
+        document.getElementById('quizSection').style.display = 'none';
+        document.getElementById('previewSection').style.display = 'none';
+        document.getElementById('menuSection').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
