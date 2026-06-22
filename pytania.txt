@@ -1,0 +1,399 @@
+// Statystyka - pytania_SiAD_AI-1.pdf z dysku Informatyka 2023 pytania 1-20
+
+Mediana (drugi kwartyl):
+-| jest wartością środkową w zbiorze obserwacji
+- oddziela 75% swoich wyższych obserwacji od 25% swoich niższych obserwacji
+- pojawia się najczęściej wśród wszystkich obserwacji
+
+Rozkład prawdopodobieństwa dyskretnej zmiennej losowej może być przedstawiony:
+-| w postaci tabeli, z wartościami zmiennej losowej w pierwszym wierszu i odpowiednimi prawdopodobieństwami w drugim wierszu
+- w postaci tabeli, z wartościami zmiennej losowej w pierwszym wierszu i odpowiednimi częstościami w drugim wierszu
+- jako $\int_{-\infty}^{\infty} f(x) dx$
+
+Niech $L$ i $U$ będą funkcjami zmiennych losowych stanowiących próbkę spełniającą $P(L < \sigma^2 < U) = 0{,}9$. Następnie różnica $(U-L)$:
+-| jest długością 90% przedziału ufności dla wariancji populacji
+- z 90% ufnością obejmuje prawdziwą wartość wariancji populacji
+- jest 90% przedziałem ufności dla wariancji populacji
+
+Hipoteza: $H_0: \sigma^2 = 0{,}9$, $H_1: \sigma^2 \neq 0{,}9$, jest związana z testowaniem:
+-| wariancji populacji
+- poziomu istotności
+- wariancji próby
+
+Załóżmy, że dwie próbki są losowo wybierane z normalnie rozmieszczonych populacji. Zanim zostanie skonstruowany przedział ufności dla różnicy między środkami populacji, najpierw zweryfikujemy, czy:
+- średnie próbek są równe
+- wariancje próbek są równe
+-| wariancje populacji nie różnią się istotnie
+
+Załóżmy, że przeprowadzono analizę wariancji i odrzucono hipotezę zerową o równości kilku środków populacji. Następnie możemy wykonać testy post-hoc, na przykład test Tukey Honest Significant Difference. Co wywnioskujemy z takiego testu post-hoc?
+-| które ze średnich populacji są istotnie podobne/różne
+- które ze środków próbki są jednorodne/heterogeniczne
+- że populacje są/nie są normalnie rozłożone
+
+Załóżmy, że wartość kowariancji próbki między dwiema zmiennymi losowymi jest równa $-0{,}9$. To pokazuje, że:
+-| wzrost wartości jednej zmiennej oznacza spadek wartości drugiej zmiennej
+- istnieje bardzo silne liniowe powiązanie między dwiema zmiennymi losowymi
+- kowariancja nie może być ujemna
+
+Testy nieparametryczne opierają się na:
+- statystykach skonstruowanych jako funkcje pomiarów o rozkładzie normalnym
+-| rangach obserwacji
+- graficznych ocenach obserwacji
+
+Na wykresie pudełkowym można zobaczyć następujące wielkości:
+- kwartyle, zakres, odchylenie standardowe
+-| zakres, minimum, pierwszy kwartyl
+- zakres, wariancja, pierwszy kwartyl
+
+Załóżmy, że $X$ jest zmienną losową o rozkładzie wykładniczym z parametrem $\lambda$. Prawdopodobieństwo, że $X$ jest większe od pewnego $a$, czyli $P(X > a)$, można obliczyć jako:
+- suma prawdopodobieństw związanych z wartościami całkowitymi $X$, które są większe od $a$
+- $1/\lambda$
+-| $1 - F(a)$, gdzie $F(x)$ to skumulowana dystrybuanta (CDF) zmiennej $X$
+
+Próba:
+- zawiera co najmniej 40 zmiennych losowych
+-| jest podzbiorem populacji
+- zazwyczaj oznaczana przez $\bar{X}$
+
+Niech $L$ i $U$ będą funkcjami zmiennych losowych tworzących próbkę spełniającą $P(L < \mu < U) = 0{,}99$. Wtedy z 99% pewnością przedział $(L,U)$ pokrywa prawdziwą wartość:
+- poziomu ufności
+-| średniej populacji
+- średniej próbki
+
+Znaczenie testu, zazwyczaj oznaczane przez $\alpha$, jest równe:
+- poziomowi ufności
+-| prawdopodobieństwu błędu I rodzaju
+- prawdopodobieństwu błędu II rodzaju
+
+Załóżmy, że dwie próbki są losowo wybrane z populacji o rozkładzie normalnym. Aby skonstruować przedział ufności dla różnicy średnich populacji, nie musimy weryfikować założenia o:
+- homogeniczności wariancji populacji
+- homogeniczności wariancji próbek
+-| normalności rozkładu obu populacji
+
+Aby przeprowadzić analizę wariancji (ANOVA) w celu przetestowania hipotezy o równości kilku średnich populacji, muszą być spełnione następujące założenia:
+- normalność rozkładu każdego leczenia i równość rozmiarów próbek
+-| normalność rozkładu każdej populacji i homogeniczność wariancji populacji
+- równość rozmiarów próbek i homogeniczność wariancji próbek
+
+Która z poniższych funkcji nie jest przeznaczona do testowania normalności rozkładu?
+- Test Kołmogorowa-Lillieforsa
+- test Shapiro-Wilka
+-| test Friedmana
+
+Rozważmy przykład, w którym chcemy porównać dwa rozkłady, a założenie o normalności nie ma sensu, ponieważ na przykład zbieramy tylko pomiary całkowite lub rozkłady są skośne. Który test jest odpowiedni do sprawdzenia, czy rozkłady są identyczne, jeśli próbki nie są niezależne?
+- test chi-kwadrat
+-| test rang Wilcoxona
+- test Pearsona
+
+// Statystyka — test - II_ Przegląd próby.pdf z dysku Informatyka 2023, pytania 1–10 ze zrzutów ekranu
+
+Analiza wariancji (ANOVA) służy do testowania hipotezy o równości:
+-| kilku średnich populacyjnych
+- kilku średnich z próby
+- kilku wariancji populacyjnych
+
+Która z poniższych funkcji nie przyda się do testowania normalności rozkładu prawdopodobieństwa?
+-| sigma.test
+- shapiro.test
+- lillie.test
+
+Błąd I-go rodzaju popełniamy, gdy:
+- nie odrzucimy prawdziwej hipotezy zerowej
+-| odrzucimy prawdziwą hipotezę zerową
+- fałszywa hipoteza zerowa zostanie odrzucona
+
+Z wykresu pudełkowego nie odczytamy wartości:
+- minimum, rozstępu i rozstępu międzykwartylowego
+-| rozstępu, wariancji i pierwszego kwartyla
+- rozstępu, minimum i trzeciego kwartyla
+
+Niech $f(x)$ będzie funkcją gęstości prawdopodobieństwa ciągłej zmiennej losowej $X$ i niech $F(x)$ będzie jej dystrybuantą. Wówczas $P(a < X < b)$ nie może być obliczone ze wzoru:
+- $\int_a^b f(x)\,dx$
+- $F(b)-F(a)$
+-| $f(b)-f(a)$
+
+Załóżmy, że pobrana została $n$-elementowa próba z rozkładu normalnego ze znanym odchyleniem standardowym $\sigma$. Do oceny przedziałowej średniej populacyjnej możemy wykorzystać funkcję:
+- zsum.test wykorzystującą kwantyle rozkładu $N(0,1)$
+-| z.test wykorzystującą kwantyle rozkładu $N(0,1)$
+- t.test wykorzystującą kwantyle rozkładu t-Studenta z $n-1$ stopniami swobody
+
+Jeżeli $X_1,\ldots,X_n$ jest próbą z rozkładu normalnego ze średnią $\mu$ i odchyleniem standardowym $\sigma$, to suma $X_1+\cdots+X_n$:
+-| ma rozkład $N(n\mu,\sqrt{n}\sigma)$
+- ma asymptotyczny rozkład $N(\mu,\sigma/\sqrt{n})$
+- ma asymptotyczny rozkład $N(n\mu,\sqrt{n}\sigma)$
+
+Rozważmy eksperyment, w którym badana jest liczba niedopełnionych puszek w zależności od automatu napełniającego (jest 6 automatów). Eksperymentator zauważył, że z upływem czasu ilość napoju w puszce maleje, niezależnie od tego, który automat je napełnia. Zatem założenie o normalności rozkładu liczby niedopełnionych puszek nie ma sensu. Którego testu użyć do sprawdzenia, czy wybór automatu ma wpływ na liczbę niedopełnionych puszek?
+- ANOVA
+-| H Kruskala-Wallisa
+- testu Wilcoxona
+
+Załóżmy, że pobrane zostały losowo dwie próby z rozkładów normalnych. Do oceny przedziałowej ilorazu wariancji populacyjnych można wykorzystać funkcję:
+- t.test
+-| var.test
+- sigma.test
+
+// Statystyka — brakujące pytania ze statystyka.md
+
+Funkcja gęstości prawdopodobieństwa ciągłej zmiennej losowej jest:
+- dowolną funkcją przyjmującą wartości z przedziału od 0 do 1
+- dowolną funkcją ciągłą, dla której pole pod wykresem wynosi 1
+-| dowolną funkcją nieujemną, dla której pole pod wykresem wynosi 1
+
+Zbiór wartości, który z prawdopodobieństwem $1-\alpha$ pokrywa prawdziwą wartość nieznanego parametru populacji, to:
+- obszar krytyczny
+- poziom ufności
+-| przedział ufności
+
+Do testowania hipotezy o normalności rozkładu populacji można użyć:
+- funkcji `zsum.test`, jeśli próba jest duża
+-| funkcji `chisq.test` po odpowiednim pogrupowaniu danych
+- funkcji `z.test`, jeśli odchylenie standardowe populacji jest znane
+
+Jeśli te same osoby rozwiązują kilka zadań w losowej kolejności i chcemy porównać rozkłady czasów ich rozwiązywania, użyjemy:
+- testu Spearmana
+-| testu Friedmana
+- testu Kruskala-Wallisa
+
+Konstruując szereg rozdzielczy lub histogram, należy zadbać, aby przedziały:
+- mogły się nakładać, o ile nie są puste
+- nie musiały pokrywać wszystkich wartości
+-| były rozłączne i pokrywały cały zbiór wartości
+
+Do weryfikacji hipotezy o dwóch średnich populacyjnych nie użyjemy:
+- funkcji `zsum.test`, gdy próby są duże i nie pochodzą z rozkładu normalnego
+-| funkcji `var.test`
+- funkcji `t.test`, gdy próby pochodzą z rozkładu normalnego
+
+Notacja $H_0:\mu \geq 5$, $H_1:\mu < 5$ opisuje:
+- hipotezę lewostronną o średniej z próby
+- hipotezę prawostronną o średniej populacyjnej
+-| hipotezę lewostronną o średniej populacyjnej
+
+Testu chi-kwadrat nie użyjemy bezpośrednio do testowania:
+- niezależności dwóch zmiennych w tablicy kontyngencji
+- równości dwóch proporcji populacyjnych
+-| normalności rozkładu populacji
+
+Moda (dominanta):
+- oddziela 75% większych obserwacji od 25% mniejszych obserwacji
+-| występuje najczęściej w zbiorze obserwacji
+- jest wartością środkową w zbiorze obserwacji
+
+Estymatorów współczynników równania regresji nie wyznaczymy za pomocą:
+- metody najmniejszych kwadratów
+- funkcji `lm(y~x)`
+-| funkcji `anova(y~x)`
+
+W analizie wariancji nie odrzucimy hipotezy zerowej, gdy wartość statystyki testowej jest:
+- niższa od odpowiedniego kwantyla rozkładu t-Studenta
+- niższa od odpowiedniego kwantyla rozkładu chi-kwadrat
+-| niższa od odpowiedniego kwantyla rozkładu F-Snedecora
+
+Jeżeli $X_1,\ldots,X_n$ jest dużą próbą z rozkładu o wartości oczekiwanej $\mu$ i odchyleniu standardowym $\sigma$, to suma $X_1+\cdots+X_n$ ma asymptotyczny rozkład:
+- $N(\mu,\sigma/\sqrt{n})$
+-| $N(n\mu,\sqrt{n}\sigma)$
+- $N(0,1)$
+
+Hipotezę zerową odrzucamy, gdy:
+-| wartość statystyki testowej należy do obszaru krytycznego
+- wartość statystyki testowej należy do przedziału ufności
+- poziom istotności jest niższy niż p-value
+
+Do weryfikacji hipotezy o dwóch proporcjach populacyjnych można wykorzystać funkcję:
+- `t.test`
+- `binom.test`
+-| `prop.test`
+
+Jeżeli $(L,U)$ jest 95% przedziałem ufności dla odchylenia standardowego populacji, to z ufnością 95% przedział ten:
+- pokrywa prawdziwą wartość średniej populacyjnej
+- pokrywa prawdziwą wartość odchylenia standardowego z próby
+-| pokrywa prawdziwą wartość odchylenia standardowego populacji
+
+Dodatnia wartość kowariancji między zmiennymi $X$ i $Y$ oznacza, że:
+-| gdy wartość $X$ rośnie, wartość $Y$ zwykle również rośnie
+- wartość $Y$ rośnie o wartość kowariancji, gdy $X$ rośnie o 1
+- gdy wartość $X$ rośnie, wartość $Y$ maleje
+
+Ujemna wartość współczynnika korelacji między zmiennymi $X$ i $Y$ oznacza, że:
+- współczynnik korelacji nie może być ujemny
+- wartość $Y$ maleje dokładnie o wartość współczynnika korelacji, gdy $X$ rośnie o 1
+-| gdy wartość $X$ rośnie, wartość $Y$ zwykle maleje
+
+Jeżeli chcemy sprawdzić, czy kolor samochodu wpływa na średnią sprzedaż danego modelu, a dostępne są co najmniej trzy kolory, najrozsądniej jest:
+- przeprowadzić test chi-kwadrat równości dwóch wariancji
+-| przeprowadzić analizę wariancji
+- użyć `t.test` do porównania dwóch średnich
+
+Gdy dwóch ekspertów sporządza rankingi tych samych tancerzy, do sprawdzenia zgodności ich opinii użyjemy:
+- testu Pearsona
+-| testu Spearmana
+- testu Wilcoxona
+
+Niech dyskretna zmienna losowa $X$ przyjmuje wartości $x_1<x_2<x_3$ z prawdopodobieństwami odpowiednio $p_1,p_2,p_3$. Wtedy $P(X=x_2)$ wynosi:
+- $p_1$
+- 0
+-| $p_2$
+
+Jeżeli $y=b_0+b_1x$ jest równaniem prostej regresji, to w teście istotności regresji hipoteza alternatywna ma postać:
+- $\rho_{XY}=0$
+-| $b_1\neq 0$
+- $b_0\neq 0$
+
+// Statystyka — pytania analogiczne / potencjalne
+
+Wykres dystrybuanty zmiennej losowej dyskretnej ma kształt:
+-| schodkowy
+- dzwonowy
+- liniowy bez skoków
+
+Dystrybuanta $F(x)$ zmiennej losowej oznacza:
+-| prawdopodobieństwo $P(X \leq x)$
+- prawdopodobieństwo $P(X = x)$
+- wartość funkcji gęstości w punkcie $x$
+
+Dla ciągłej zmiennej losowej dystrybuanta jest zwykle:
+-| funkcją ciągłą
+- funkcją zawsze schodkową
+- funkcją malejącą
+
+Statystyka to:
+-| dowolna funkcja zmiennych losowych stanowiących próbę
+- dowolna funkcja parametrów populacji
+- średnia populacyjna
+
+Która z poniższych wielkości nie jest statystyką?
+- średnia z próby
+- suma obserwacji z próby
+-| średnia populacyjna $\mu$
+
+Która z poniższych wielkości jest statystyką?
+-| wariancja z próby
+- wariancja populacji $\sigma^2$
+- parametr $\lambda$ rozkładu wykładniczego
+
+W przedziale ufności dla średniej populacji $\mu$ losowe są:
+-| granice przedziału $L$ i $U$
+- parametr $\mu$
+- poziom ufności po obliczeniu przedziału
+
+Poziom ufności $1-\alpha$ oznacza:
+-| prawdopodobieństwo pokrycia prawdziwego parametru przez losowo skonstruowany przedział
+- prawdopodobieństwo błędu I rodzaju
+- wartość średniej populacji
+
+Błąd II rodzaju polega na:
+-| nieodrzuceniu fałszywej hipotezy zerowej
+- odrzuceniu prawdziwej hipotezy zerowej
+- odrzuceniu fałszywej hipotezy zerowej
+
+Wykres pudełkowy pozwala odczytać:
+-| minimum, pierwszy kwartyl, medianę, trzeci kwartyl i maksimum
+- średnią, wariancję i odchylenie standardowe
+- wyłącznie wartości odstające
+
+Rozstęp międzykwartylowy to:
+-| różnica między trzecim a pierwszym kwartylem
+- różnica między maksimum a minimum
+- różnica między średnią a medianą
+
+Mediana na wykresie pudełkowym jest zazwyczaj przedstawiona jako:
+-| linia wewnątrz pudełka
+- koniec górnego wąsa
+- punkt odstający
+
+Testy post-hoc po ANOVA stosuje się, aby:
+-| sprawdzić, które średnie różnią się istotnie między sobą
+- sprawdzić normalność każdej populacji
+- obliczyć dystrybuantę zmiennej losowej
+
+Test Tukeya jest przykładem:
+-| testu post-hoc po analizie wariancji
+- testu normalności rozkładu
+- testu zgodności chi-kwadrat
+
+Funkcja `shapiro.test` służy do:
+-| testowania normalności rozkładu
+- testowania równości wariancji dwóch populacji
+- testowania niezależności dwóch zmiennych jakościowych
+
+Test Kruskala-Wallisa jest nieparametrycznym odpowiednikiem:
+-| jednoczynnikowej analizy wariancji ANOVA
+- testu Shapiro-Wilka
+- testu F dla wariancji
+
+// Statystyka — uzupełnienie brakujących poprawnych odpowiedzi
+
+Do testowania hipotezy o dwóch średnich populacyjnych dla dużych prób można wykorzystać funkcję:
+- `t.test`
+-| `zsum.test`
+- `var.test`
+
+Funkcja `binom.test` w R służy między innymi do:
+- testowania równości wariancji dwóch populacji
+-| testowania hipotezy o jednej proporcji populacyjnej
+- testowania normalności rozkładu
+
+Funkcja `lillie.test` służy do:
+- testowania równości średnich dwóch populacji
+-| testowania normalności rozkładu
+- testowania niezależności zmiennych w tablicy kontyngencji
+
+W celu zbadania liniowej zależności między dwiema zmiennymi ilościowymi można zastosować:
+- test Spearmana wyłącznie dla danych nominalnych
+-| test Pearsona
+- test Kruskala-Wallisa
+
+Współczynniki liniowego modelu regresji $y=b_0+b_1x$ można wyznaczyć w R za pomocą:
+- `anova(y~x)`
+-| `lm(y~x)`
+- `chisq.test(y~x)`
+
+Jeżeli $X_1,\ldots,X_n$ jest próbą z rozkładu normalnego o średniej $\mu$ i odchyleniu standardowym $\sigma$, to średnia z próby $\overline{X}$ ma rozkład:
+- $N(n\mu,\sqrt{n}\sigma)$
+-| $N(\mu,\sigma/\sqrt{n})$
+- $N(0,1)$
+
+Hipotezę zerową odrzucamy na poziomie istotności $\alpha$, gdy:
+- $p\text{-value}>\alpha$
+-| $p\text{-value}<\alpha$
+- $p\text{-value}=1-\alpha$
+
+Notacji $H_0: p \le 0{,}9, H_1: p > 0{,}9$ użyjemy do zapisu:
+- hipotezy prawostronnej o proporcji z próby
+- hipotezy lewostronnej o proporcji z próby
+-| hipotezy prawostronnej o proporcji populacyjnej
+
+Jeśli równanie prostej regresji ma postać $y=b_0+b_1x$, to dodatnia wartość współczynnika regresji $b_1$ informuje:
+- o o ile wzrośnie wartość $y$, jeśli wartość $x$ wzrośnie o $b_1$
+- jaka jest wartość $y$, jeśli $x$ jest równy $b_1$
+-| o o ile wzrośnie wartość $y$, jeśli $x$ wzrośnie o 1
+
+Jeśli równanie prostej regresji ma postać $y=b_0+b_1x$, to ujemna wartość współczynnika regresji informuje:
+- o o ile wzrośnie wartość $y$, jeśli wartość $x$ zmaleje o $b_1$
+- jaka jest wartość $y$ dla $x$ równego $b_1$
+-| o o ile zmaleje wartość $y$, jeśli wartość $x$ wzrośnie o 1
+
+Załóżmy, że po przeprowadzeniu analizy wariancji hipoteza zerowa o równości kilku średnich populacyjnych została odrzucona. Wówczas interesujące jest zazwyczaj wyznaczenie grup jednorodnych. Nie dokonamy tego wykorzystując:
+- test najmniejszych istotnych różnic (LSD) zaproponowany przez Fishera
+- test Tukeya uczciwych istotnych różnic (funkcja `TukeyHSD`)
+-| przedział ufności dla ilorazu wariancji populacyjnych (funkcja `var.test`)
+
+Która z poniższych funkcji przeznaczona jest do testowania hipotezy o dopasowaniu rozkładu liczebności do zadanego wzorca?
+- `lillie.test`
+- `shapiro.test`
+-| `chisq.test`
+
+Która z wielkości nie mierzy zróżnicowania?
+- rozstęp
+- wariancja
+-| moda
+
+Jedną z miar zróżnicowania jest:
+- kwantyl dowolnego rzędu
+- mediana
+-| odchylenie standardowe
+
+Do oceny przedziałowej różnicy proporcji populacyjnych można wykorzystać funkcję:
+- `var.test`
+- `binom.test`
+-| `prop.test`
