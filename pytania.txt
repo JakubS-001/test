@@ -397,3 +397,63 @@ Do oceny przedziałowej różnicy proporcji populacyjnych można wykorzystać fu
 - `var.test`
 - `binom.test`
 -| `prop.test`
+
+Załóżmy, że dysponujemy dużym zbiorem danych dyskretnych, którego elementami jest kilka (np. 7) liczb, które mogą się powtarzać. Które z poniższych zdań nie jest prawdą?
+- Do interpretacji graficznej danych lepiej byłoby użyć odcinkowego diagramu liczebności lub częstości zamiast tradycyjnego histogramu.
+-| Zróżnicowanie obserwacji jest małe.
+- Analizę danych dobrze byłoby wykonana na bazie punktowego szeregu rozdzielczego.
+
+Niech X będzie zmienną losową o rozkładzie wykładniczym z parametrem λ. Prawdopodobieństwo, że X jest większe od a, tj. P(X > a), można obliczyć jako:
+- 1/λ
+- sumę prawdopodobieństw całkowitych wartości zmiennej losowej X większych od a
+-| 1 - F(a), gdzie F(x) jest dystrybuantą zmiennej losowej X
+
+Jeżeli zmienne losowe X1,...,Xn tworzą próbę z populacji o rozkładzie N(μ, σ), to zmienna losowa T = X1 + ... + Xn ma:
+-| dokładny rozkład N(n*μ, sqrt(n)*σ)
+- przybliżony rozkład N(n*μ, sqrt(n)*σ)
+- dokładny rozkład N(μ, σ/sqrt(n))
+
+Niech L i U będą funkcjami zmiennych losowych stanowiących próbkę spełniającą P(L < σ^2 < U) = 0,9. Następnie różnica (U - L):
+-| jest długością 90% przedziału ufności dla wariancji populacji
+- z 90% ufnością obejmuje prawdziwą wartość wariancji populacji
+- jest 90% przedziałem ufności dla wariancji populacji
+
+Niech X1,...,Xn będzie n-elementową próbą z populacji N(μ, σ) oraz niech x_bar będzie średnią arytmetyczną obserwacji. Który z poniższych zapisów hipotez nie dotyczy testu średniej populacyjnej?
+- H0: μ = 5, H1: μ ≠ 5
+-| H0: x_bar = 5, H1: x_bar ≠ 5
+- H0: μ ≤ 5, H1: μ > 5
+
+Przypuśćmy, że dwie próby wybrane zostały losowo z populacji o rozkładach normalnych. Do skonstruowania przedziału ufności dla różnicy średnich populacyjnych należy zweryfikować założenie o:
+-| jednorodności wariancji populacyjnych
+- równych wielkościach prób
+- równości wariancji próbkowych
+
+Przypuśćmy, że w wyniku przeprowadzenia analizy wariancji (ANOVA) hipoteza zerowa o równości średnich populacyjnych została odrzucona. Wówczas przeprowadza się testy post-hoc (np. test Tukeya). Co można wywnioskować z takiej analizy?
+- które wariancje są jednorodne
+-| które ze średnich populacyjnych są istotnie różne
+- które ze średnich próbkowych są różne
+
+Przypuśćmy, że interesuje nas zbadanie, czy kolor samochodu ma wpływ na wielkość sprzedaży, przy czym zasadne jest założenie, że wielkość sprzedaży zależy od regionu, w którym usytuowany jest salon samochodowy. Wówczas nieprawdą jest, że:
+-| uwzględnienie efektów lokalizacji w analizie wariancji zwiększa błąd średniokwadratowy (MSE) modelu
+- uwzględnienie efektów lokalizacji w analizie wariancji zmniejsza błąd średniokwadratowy (MSE) modelu
+- przeprowadzając analizę wariancji dla modelu liniowego z efektami obiektowymi i blokowymi testujemy hipotezę, czy uwzględnienie lokalizacji w modelu ma istotny wpływ na zróżnicowanie średnich wielkości sprzedaży samochodów w różnych kolorach
+
+Ujemna wartość współczynnika korelacji między zmiennymi X i Y wskazuje, że:
+-| wraz ze wzrostem X maleją wartości Y
+- wraz ze wzrostem X o 1 wartość Y maleje o wartość współczynnika korelacji
+- współczynnik korelacji nie może być ujemny
+
+Które z poniższych stwierdzeń jest prawdziwe?
+- istnieje dokładnie 5 testów służących do weryfikacji normalności rozkładu
+-| nie istnieje jeden najlepszy test służący do weryfikacji normalności rozkładu
+- do weryfikacji normalności rozkładu możemy wykorzystać tylko test chi-kwadrat
+
+Załóżmy, że chcemy porównać rozkłady prawdopodobieństwa k populacji (k > 2), przy czym założenie o normalności rozkładów jest nieuzasadnione. Wówczas racjonalne jest przeprowadzenie:
+- testu korelacyjnego Spearmana
+- analizy wariancji (ANOVA)
+-| testu Kruskala-Wallisa
+
+Załóżmy, że na obserwowaną zmienną losową Y może mieć wpływ m zmiennych niezależnych Xi. Wówczas dobrze byłoby zweryfikować hipotezę o jednoczesnej istotności współczynników regresji w oparciu o n-wymiarową próbę. Przyjmując, że E(Y) = Xβ, gdzie X i β są macierzami, hipoteza zerowa ma postać:
+- β = 0
+- X = 0
+-| (β1, ..., βm)' = 0
