@@ -507,9 +507,10 @@
             if (!state.checkedAnswersVerified) {
                 input.addEventListener('change', () => {
                     if (input.checked) {
-                        if (!state.checked).push(idx);
-                        state.checked.push(idx);
-                    } else {
+                            if (!state.checked.includes(idx)) {
+                                state.checked.push(idx);
+                            }
+                        } else {
                         state.checked = state.checked.filter(i => i !== idx);
                     }
                 });
