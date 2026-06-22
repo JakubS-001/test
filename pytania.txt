@@ -229,7 +229,7 @@ Gdy dwóch ekspertów sporządza rankingi tych samych tancerzy, do sprawdzenia z
 -| testu Spearmana
 - testu Wilcoxona
 
-Niech dyskretna zmienna losowa $X$ przyjmuje wartości $x_1 < x_2 < x_3$ z prawdopodobieństwami odpowiednio $p_1,p_2,p_3$. Wtedy $P(X=x_2)$ wynosi:
+Niech dyskretna zmienna losowa $X$ przyjmuje wartości x_1 < x_2 < x_3 z prawdopodobieństwami odpowiednio $p_1,p_2,p_3$. Wtedy $P(X=x_2)$ wynosi:
 - $p_1$
 - 0
 -| $p_2$
